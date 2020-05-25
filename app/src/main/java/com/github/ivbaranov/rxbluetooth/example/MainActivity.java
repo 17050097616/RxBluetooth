@@ -20,14 +20,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.github.ivbaranov.rxbluetooth.RxBluetooth;
 import com.github.ivbaranov.rxbluetooth.predicates.BtPredicate;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
   private static final int REQUEST_PERMISSION_COARSE_LOCATION = 0;
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    //-------------------------------------
+    BluetoothServer.getInstance().startServer();
+    //-------------------------------------
     setContentView(R.layout.activity_main);
     start = (Button) findViewById(R.id.start);
     stop = (Button) findViewById(R.id.stop);
@@ -105,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
       rxBluetooth.cancelDiscovery();
     }
     compositeDisposable.dispose();
+    BluetoothServer.getInstance().destroy();
   }
 
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],

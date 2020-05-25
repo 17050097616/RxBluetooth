@@ -17,12 +17,12 @@ package com.github.ivbaranov.rxbluetooth;
 
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
+
 import com.github.ivbaranov.rxbluetooth.exceptions.ConnectionClosedException;
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
-import io.reactivex.FlowableOnSubscribe;
-import io.reactivex.FlowableOperator;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,8 +30,12 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
+
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.FlowableOperator;
 
 public final class BluetoothConnection {
 
